@@ -790,7 +790,7 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x40 = 0.0f;
 
-    fp->x2224_b7 = 0;
+    fp->x2224_b7 = 1;
 
     fp->x60C = 0;
 
