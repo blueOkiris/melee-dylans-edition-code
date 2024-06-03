@@ -39,13 +39,16 @@ void ftCo_LandingAir_EnterWithLag(ftCo_GObj* gobj)
             lag = fp->co_attrs.landingairlw_lag;
             break;
         }
-        if (msid != ftCo_MS_None && fp->x67F < p_ftCommonData->xE4) {
-            float div_lag = lag / p_ftCommonData->xE8;
-            int int_lag = div_lag;
-            if ((int) div_lag == 0) {
-                int_lag = 1;
-            }
-            lag = int_lag;
+        if (msid != ftCo_MS_None && fp->x67F < 10) {//p_ftCommonData->xE4) {
+            lag = 4;
+        }
+        asm {
+            nop
+            nop
+            nop
+            nop
+            nop
+            nop
         }
     }
     if (msid != ftCo_MS_None) {
