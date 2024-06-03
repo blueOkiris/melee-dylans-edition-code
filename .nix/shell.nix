@@ -23,6 +23,7 @@ melee.overrideAttrs (oa: {
     })
     pkgs.clang.cc.python
     pkgs.ccls
+    pkgs.xdelta
   ];
 
   DEVKITPPC = pkgs.devkitppc;
