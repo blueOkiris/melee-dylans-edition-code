@@ -22,6 +22,7 @@ melee.overrideAttrs (oa: {
       llvmPackages = pkgs.llvmPackages_15;
     })
     pkgs.clang.cc.python
+    pkgs.ccls
   ];
 
   DEVKITPPC = pkgs.devkitppc;
