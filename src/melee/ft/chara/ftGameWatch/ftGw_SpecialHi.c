@@ -243,7 +243,6 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftGameWatchAttributes* gawAttrs;
-    int ledgeGrabDir;
 
     u8 _[8];
 
@@ -260,12 +259,13 @@ void ftGw_SpecialAirHi_Coll(HSD_GObj* gobj)
                 fp->take_dmg_cb = NULL;
             }
         } else {
-            if (1.0f == fp->facing_dir) {
-                ledgeGrabDir = 1;
-            } else {
-                ledgeGrabDir = -1;
+            asm {
+                nop
+                nop
+                nop
+                nop
             }
-            if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
+            if (ft_CheckGroundAndLedge(gobj, 0) != false) {
                 ftCo_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
             } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
