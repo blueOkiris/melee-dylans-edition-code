@@ -714,8 +714,8 @@ typedef struct ftCo_DatAttrs {
     /* +12C fp+254 */ int x12C;
     /* +130 fp+258 */ float x130;
     /* +134 fp+25C */ float bubble_ratio;
-    /* +138 fp+260 */ int x138;
-    /* +13C fp+264 */ int x13C;
+    /* +138 fp+260 */ float x138;
+    /* +13C fp+264 */ float x13C;
     /* +140 fp+268 */ float x140;
     /* +144 fp+26C */ int x144;
     /* +148 fp+270 */ float respawn_platform_scale;

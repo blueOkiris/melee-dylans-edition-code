@@ -95,7 +95,7 @@ bool ftGw_AttackAirN_ItemCheckParachuteRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = fp->motion_id;
 
-    if (msid >= ftGw_MS_AttackAirN && msid <= ftGw_MS_LandingAirN) {
+    if (msid >= ftCo_MS_AttackAirN && msid <= ftGw_MS_LandingAirN) {
         return false;
     }
 
@@ -184,7 +184,7 @@ bool ftGw_AttackAirN_ItemCheckTurtleRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = fp->motion_id;
 
-    if ((msid >= ftGw_MS_AttackAirB) && (msid <= ftGw_MS_LandingAirB)) {
+    if ((msid >= ftCo_MS_AttackAirB) && (msid <= ftGw_MS_LandingAirB)) {
         return false;
     }
     return true;
@@ -302,7 +302,7 @@ bool ftGw_AttackAirN_ItemCheckSparkyRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = fp->motion_id;
 
-    if ((msid >= ftGw_MS_AttackAirHi) && (msid <= ftGw_MS_LandingAirHi)) {
+    if ((msid >= ftCo_MS_AttackAirHi) && (msid <= ftGw_MS_LandingAirHi)) {
         return false;
     }
     return true;
@@ -343,8 +343,7 @@ void ftGw_AttackAirN_DecideAction(HSD_GObj* gobj)
 void ftGw_AttackAirN_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirN);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftCo_MS_AttackAirN);
     fp->accessory4_cb = ftGw_AttackAirN_ItemParachuteSetup;
 }
 
@@ -417,8 +416,7 @@ void ftGw_LandingAirN_Enter(HSD_GObj* gobj)
 static void ftGw_AttackAirB_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirB);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftCo_MS_AttackAirB);
     fp->accessory4_cb = ftGw_AttackAirN_ItemTurtleSetup;
 }
 
@@ -487,8 +485,7 @@ void ftGw_LandingAirB_Enter(HSD_GObj* gobj)
 static void ftGw_AttackAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    ftCo_AttackAir_EnterFromMsid(gobj, ftGw_MS_AttackAirHi);
+    ftCo_AttackAir_EnterFromMsid(gobj, ftCo_MS_AttackAirHi);
     fp->accessory4_cb = ftGw_AttackAirN_ItemSparkySetup;
 }
 
@@ -551,9 +548,10 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-
-    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirN,
-                                     fp->co_attrs.landingairn_lag);
+    ftCo_LandingAir_EnterWithMsidLag(
+        gobj, ftCo_MS_AttackAirN,
+        fp->co_attrs.x130//landingairn_lag
+    );
 }
 
 // 0x8014BB24
@@ -602,9 +600,10 @@ void ftGw_LandingAirN_Coll(HSD_GObj* gobj)
 void ftGw_LandingAirB_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
-    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirB,
-                                     fp->co_attrs.landingairb_lag);
+    ftCo_LandingAir_EnterWithMsidLag(
+        gobj, ftCo_MS_LandingAirB,//ftGw_MS_LandingAirB,
+        fp->co_attrs.x138//landingairb_lag
+    );
 }
 
 // 0x8014BC0C
@@ -652,8 +651,10 @@ void ftGw_LandingAirHi_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     // Erroneously using Back Aerial's landing lag
-    ftCo_LandingAir_EnterWithMsidLag(gobj, ftGw_MS_LandingAirHi,
-                                     fp->co_attrs.landingairb_lag);
+    ftCo_LandingAir_EnterWithMsidLag(
+        gobj, ftCo_MS_LandingAirHi,//ftGw_MS_LandingAirHi,
+        fp->co_attrs.x13C//landingairb_lag
+    );
 }
 
 // 0x8014BCF4
