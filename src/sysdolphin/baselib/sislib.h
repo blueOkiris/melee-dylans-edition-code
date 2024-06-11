@@ -32,13 +32,15 @@ typedef struct SIS {
 
 extern s8 HSD_SisLib_804D6390[4];
 extern SIS* HSD_SisLib_804D1124[5];
-extern HSD_Archive* HSD_SisLib_804D1110[5];
+HSD_Archive* HSD_SisLib_804D1110[5];
 extern u32 lbl_8040C8C0[144];
 extern u32 HSD_SisLib_8040C680[144];
 extern UNK_T HSD_SisLib_8040C4B8;
 
 extern sislib_UnknownType001 HSD_SisLib_8040C4A4;
 extern sislib_UnknownType001 HSD_SisLib_8040C490;
+
+extern void *HSD_SisLib_804D796C;
 
 void HSD_SisLib_803A6048(size_t);
 UNK_T func_804A70A0(UNK_T, s32, u32, s32, s32, s32, s32, s32, f64, f64, f64,
@@ -69,5 +71,7 @@ s32 HSD_SisLib_803A611C(s16, u32, s16, s8, s8, s8, s8, u32);
 void lbl_803A60EC(void);
 UNK_T HSD_SisLib_803A5ACC(char, int, f32, f32, f32, f32, f32);
 void HSD_SisLib_803A594C(u8*);
+void HSD_SisLib_803A5E70(void);
+void HSD_SisLib_803A5FBC(void);
 
 #endif

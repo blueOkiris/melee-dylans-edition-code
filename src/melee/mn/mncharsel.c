@@ -2,13 +2,36 @@
 
 #include "gm/gmmain_lib.h"
 #include "lb/lblanguage.h"
+#include "lb/lbaudio_ax.h"
 #include "mn/types.h"
 #include "ft/forward.h"
 
 #include <baselib/sislib.h>
 
+typedef struct UknDataType10 {
+    u8 *x0;
+    u8 *x4;
+    u8 x8;
+    u8 x9;
+    u8 xA;
+    u8 xB;
+    u8 xC;
+    u8 xD;
+    u8 xE;
+    u8 xF;
+} UknDataType10;
+
 extern CSSData* mnCharSel_804D6CB0;
 extern SIS* HSD_SisLib_804D1124[];
+extern HSD_Archive *mnCharSel_804D6CD0;
+extern HSD_Archive *mnCharSel_804D6CD4;
+u8 mnCharSel_804D6CF0;
+u8 mnCharSel_804D6CF1;
+u8 mnCharSel_804D6CF5;
+u8 mnCharSel_804D6CF6; // Match type?
+
+UknDataType10 mnCharSel_804A0BC0;
+UknDataType10 mnCharSel_804A0BD0;
 
 // Can't be enum bc float, but reused values
 #define ICONROWHT_TOP_TOP        20.0F
@@ -377,5 +400,82 @@ void mnCharSel_8025BD30(void)
             HSD_SisLib_803A660C(0, 0x4A, 0x4E);
             return;
         }
+    }
+}
+
+void mnCharSel_80266D70(void) {
+    int temp_r4;
+    int temp_r4_2;
+    int var_r26;
+    int var_r28;
+    int var_r31;
+    u32 var_r29;
+    u64 temp_ret;
+    u64 temp_ret_2;
+    u64 temp_ret_3;
+    u64 var_r30;
+    u8 temp_r0;
+    u8 temp_r0_2;
+    u8 temp_r0_3;
+    UknDataType10 *var_r27;
+    CSSData *temp_r4_3;
+
+    //HSD_SisLib_803A5FBC(&mnCharSel_804A0BC0);
+    if (mnCharSel_804D6CD0 != NULL) {
+        lbArchive_80016EFC(mnCharSel_804D6CD0);
+        mnCharSel_804D6CD0 = NULL;
+    }
+    if (mnCharSel_804D6CD4 != NULL) {
+        lbArchive_80016EFC(mnCharSel_804D6CD4);
+        mnCharSel_804D6CD4 = NULL;
+    }
+    mnCharSel_804D6CB0->pending_scene_change = (u8) mnCharSel_804D6CF6;
+    if ((u8) mnCharSel_804D6CF6 == 0) {
+        var_r29 = 0;
+        var_r30 = 0;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            temp_r4 = (s8) mnCharSel_804D6CF0 * 0x24;
+            temp_r0 = (mnCharSel_804D6CB0 + temp_r4)->data.data.rules.unk_0x29;
+            if (((temp_r0 == 0) || (temp_r0 == 1)) && ((u8) mnCharSel_804A0BD0.x0[5] == 0)) {
+                temp_ret = lbAudioAx_80026E84((s8) (mnCharSel_804D6CB0->ko_star_counts[temp_r4]));
+                var_r29 = (u32) temp_ret;
+                var_r30 = temp_ret;
+            }
+            temp_r4_2 = (s8) mnCharSel_804D6CF1 * 0x24;
+            temp_r0_2 = mnCharSel_804D6CB0->ko_star_counts[temp_r4_2];
+            if (((temp_r0_2 == 0) || (temp_r0_2 == 1)) && ((u8) mnCharSel_804A0BD0.x4[5] == 0)) {
+                temp_ret_2 = lbAudioAx_80026E84(
+                    (s8) mnCharSel_804D6CB0->ko_star_counts[temp_r4_2]
+                );
+                var_r29 |= (u32) temp_ret_2;
+                var_r30 |= temp_ret_2;
+            }
+        } else {
+            if ((u8) mnCharSel_804D6CB0->match_type == 1) {
+                var_r28 = 3;
+            } else {
+                var_r28 = 4;
+            }
+            var_r27 = &mnCharSel_804A0BD0;
+            var_r26 = 0;
+            var_r31 = 0;
+loop_23:
+            if (var_r26 < var_r28) {
+                temp_r4_3 = mnCharSel_804D6CB0 + var_r31;
+                temp_r0_3 = temp_r4_3->data.data.rules.unk_0x28;
+                if (((temp_r0_3 == 0) || (temp_r0_3 == 1)) && ((u8) *((u8 *) var_r27 + 5) == 0)) {
+                    temp_ret_3 = lbAudioAx_80026E84((s8) temp_r4_3->data.data.rules.unk_0x28);
+                    var_r29 |= (u32) temp_ret_3;
+                    var_r30 |= temp_ret_3;
+                }
+                var_r31 += 0x24;
+                var_r27 += 4;
+                var_r26 += 1;
+                goto loop_23;
+            }
+        }
+        lbAudioAx_80026F2C(0x14);
+        lbAudioAx_8002702C(4, var_r30, var_r29);
+        lbAudioAx_80027168();
     }
 }
